@@ -23,8 +23,12 @@ websites:
     selector: "article"   # optional CSS selector for item links
 ```
 
-- **Telegram**: list channel usernames. The script fetches `https://t.me/s/<username>`.
+- **Telegram**: list channel usernames, or use a dict for options:
+  - Simple: `- durov` (fetches one page, up to 50 items).
+  - Full fetch (incremental): use `name`, `full_fetch: true`, and optional `max_items: 100`. Each run fetches only new items since last run and merges with previous items, keeping at most `max_items` (cap 100).
 - **Websites**: `type: rss` for RSS/Atom feeds; `type: html` for a normal page (optional `selector` for the element that wraps each link).
+
+The Pages UI includes **Filter by source** chips (All + one per source) and a reader that shows full article content when you open an item.
 
 ### 2. Enable GitHub Pages
 

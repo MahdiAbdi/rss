@@ -1,7 +1,10 @@
 # Telegram channels (public): username only, no @ or t.me
 # Script fetches https://t.me/s/<username>
+# Optional: use dict with full_fetch: true to keep up to max_items (default 100), merging new items each run
 telegram:
-  - VahidOnline
+  - name: VahidOnline
+    full_fetch: true
+    max_items: 100
 
 # Websites: RSS or HTML. For HTML, optional selector for item containers.
 websites:
