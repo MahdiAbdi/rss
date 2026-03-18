@@ -37,9 +37,9 @@
 
   function formatDateRange(minStr, maxStr) {
     if (!minStr && !maxStr) return "";
-    if (minStr && maxStr) return "Articles from " + formatDate(minStr) + " to " + formatDate(maxStr);
-    if (minStr) return "From " + formatDate(minStr);
-    return "Until " + formatDate(maxStr);
+    if (minStr && maxStr) return "از " + formatDate(minStr) + " تا " + formatDate(maxStr);
+    if (minStr) return "از " + formatDate(minStr);
+    return "تا " + formatDate(maxStr);
   }
 
   function applyTheme(theme) {
@@ -47,7 +47,7 @@
     if (theme === "dark" || theme === "light") {
       root.setAttribute("data-theme", theme);
       try { localStorage.setItem("feed-theme", theme); } catch (e) {}
-      themeToggleEl.textContent = theme === "dark" ? "Light" : "Dark";
+      themeToggleEl.textContent = theme === "dark" ? "روشن" : "تاریک";
     }
   }
 
@@ -67,7 +67,7 @@
   function showError(msg) {
     loadingEl.style.display = "none";
     cardListEl.style.display = "none";
-    errorEl.textContent = msg || "Could not load feed.";
+    errorEl.textContent = msg || "بارگذاری خوراک ممکن نشد.";
     errorEl.style.display = "block";
   }
 
@@ -111,7 +111,7 @@
       filtersEl.innerHTML = "";
       return;
     }
-    var html = '<button type="button" class="filter-chip' + (activeFilterId === "all" ? " is-active" : "") + '" data-filter-id="all">All</button>';
+    var html = '<button type="button" class="filter-chip' + (activeFilterId === "all" ? " is-active" : "") + '" data-filter-id="all">همه</button>';
     feed.sources.forEach(function (source) {
       var id = source.id || "";
       var title = escapeHtml(source.title || id);
@@ -131,7 +131,7 @@
   function renderCardList() {
     var items = getFilteredItems();
     if (items.length === 0) {
-      cardListEl.innerHTML = "<li class=\"loading\">No articles in this filter.</li>";
+      cardListEl.innerHTML = "<li class=\"loading\">مطلبی در این فیلتر نیست.</li>";
       cardListEl.style.display = "block";
       loadingEl.style.display = "none";
       return;
@@ -197,7 +197,7 @@
   function renderFeed(data) {
     feed = data;
     if (feed.updated) {
-      updatedEl.textContent = "Last updated: " + feed.updated.slice(0, 19).replace("T", " ");
+      updatedEl.textContent = "آخرین به‌روزرسانی: " + feed.updated.slice(0, 19).replace("T", " ");
     }
     renderDateRange();
     renderFilters();

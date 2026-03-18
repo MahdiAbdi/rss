@@ -5,8 +5,17 @@ telegram:
   - name: VahidOnline
     full_fetch: true
     max_items: 100
+  - name: VahidOOnline
+    full_fetch: true
+    max_items: 100
+  - name: mamlekate
+    full_fetch: true
+    max_items: 100
+  - name: iranintltv
+    full_fetch: true
+    max_items: 100
 
 # Websites: RSS or HTML. For HTML, optional selector for item containers.
 websites:
-  - url: https://www.radiofarda.com/rssfeeds
-    type: rss
+  # - url: https://www.radiofarda.com/rssfeeds
+  #   type: rss

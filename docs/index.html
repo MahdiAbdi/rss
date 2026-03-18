@@ -1,37 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feed</title>
+  <title>خبرخوان</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="app-header">
+    <div class="masthead">
+      <h1 class="masthead__title">خبرخوان</h1>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="تم">تم</button>
+    </div>
     <div class="app-header__row">
       <div class="app-header__meta">
-        <span id="updated">Loading…</span>
+        <span id="updated">در حال بارگذاری…</span>
         <span class="app-header__daterange" id="daterange" aria-hidden="true"></span>
       </div>
-      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">Theme</button>
     </div>
-    <p class="filters-label">Filter by source</p>
-    <div class="filters" id="filters" aria-label="Filter by source"></div>
+    <p class="filters-label">منبع</p>
+    <div class="filters" id="filters" aria-label="فیلتر بر اساس منبع"></div>
   </header>
 
   <main class="main">
-    <p class="loading" id="loading">Loading feed…</p>
+    <p class="loading" id="loading">در حال بارگذاری…</p>
     <p class="error-msg" id="error" style="display: none;"></p>
     <ul class="card-list" id="card-list" style="display: none;"></ul>
   </main>
 
-  <div class="reader-overlay" id="reader-overlay" role="dialog" aria-modal="true" aria-label="Article">
+  <div class="reader-overlay" id="reader-overlay" role="dialog" aria-modal="true" aria-label="مطلب">
     <article class="reader" id="reader">
       <div class="reader__header">
-        <button type="button" class="reader__close" id="reader-close" aria-label="Close">← Back</button>
+        <button type="button" class="reader__close" id="reader-close" aria-label="بستن">← بازگشت</button>
         <p class="reader__meta" id="reader-meta"></p>
         <h1 class="reader__title" id="reader-title"></h1>
-        <a class="reader__open-original" id="reader-original" href="#" target="_blank" rel="noopener">Open original</a>
+        <a class="reader__open-original" id="reader-original" href="#" target="_blank" rel="noopener">متن اصلی</a>
       </div>
       <div class="reader__body" id="reader-body"></div>
     </article>
