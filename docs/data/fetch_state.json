@@ -1,5 +1,14 @@
 {
   "telegram/VahidOnline": {
-    "last_message_id": "72831"
+    "last_message_id": "72832"
+  },
+  "telegram/VahidOOnline": {
+    "last_message_id": "226628"
+  },
+  "telegram/mamlekate": {
+    "last_message_id": "101865"
+  },
+  "telegram/iranintltv": {
+    "last_message_id": "326804"
   }
 }
