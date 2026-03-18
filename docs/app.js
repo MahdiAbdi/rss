@@ -52,7 +52,8 @@
     return div.innerHTML;
   }
 
-  fetch('data/feed.json')
+  var feedUrl = window.FEED_URL || 'data/feed.json';
+  fetch(feedUrl)
     .then(function (res) {
       if (!res.ok) throw new Error('Failed to load feed: ' + res.status);
       return res.json();

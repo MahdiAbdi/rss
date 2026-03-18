@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feed</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 52rem; margin: 0 auto; padding: 1rem; color: #1a1a1a; background: #fafafa; }
+    h1 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .meta { color: #666; font-size: 0.875rem; margin-bottom: 1.5rem; }
+    section { margin-bottom: 2rem; }
+    .source-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .source-title a { color: inherit; text-decoration: none; }
+    .source-title a:hover { text-decoration: underline; }
+    .items { list-style: none; padding: 0; margin: 0; }
+    .item { padding: 0.6rem 0; border-bottom: 1px solid #eee; }
+    .item:last-child { border-bottom: none; }
+    .item a { color: #0066cc; text-decoration: none; }
+    .item a:hover { text-decoration: underline; }
+    .item-date { font-size: 0.75rem; color: #888; margin-top: 0.2rem; }
+    .item-snippet { font-size: 0.875rem; color: #444; margin-top: 0.25rem; }
+    #loading { color: #666; }
+    #error { color: #b00; }
+  </style>
+</head>
+<body>
+  <h1>Feed</h1>
+  <p class="meta" id="updated">Loading…</p>
+  <div id="content"></div>
+  <p id="loading">Loading feed…</p>
+  <p id="error" style="display:none;"></p>
+  <script>window.FEED_URL = 'docs/data/feed.json';</script>
+  <script src="docs/app.js"></script>
+</body>
+</html>
