@@ -24,6 +24,20 @@
     return div.innerHTML;
   }
 
+  var persianDigits = "۰۱۲۳۴۵۶۷۸۹";
+
+  function toPersianDigits(str) {
+    if (str == null) return "";
+    str = String(str);
+    var out = "";
+    for (var i = 0; i < str.length; i++) {
+      var c = str.charAt(i);
+      if (c >= "0" && c <= "9") out += persianDigits.charAt(parseInt(c, 10));
+      else out += c;
+    }
+    return out;
+  }
+
   function gregorianToJalali(gy, gm, gd) {
     var g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
     var jy = gy <= 1600 ? 0 : 979;
@@ -46,7 +60,11 @@
     try {
       var d = new Date(isoStr);
       if (isNaN(d.getTime())) return isoStr;
-      return gregorianToJalali(d.getFullYear(), d.getMonth() + 1, d.getDate());
+      var datePart = gregorianToJalali(d.getFullYear(), d.getMonth() + 1, d.getDate());
+      var h = d.getHours();
+      var m = d.getMinutes();
+      var timePart = (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+      return toPersianDigits(datePart + " " + timePart);
     } catch (e) {
       return isoStr;
     }
@@ -214,7 +232,7 @@
   function renderFeed(data) {
     feed = data;
     if (feed.updated) {
-      updatedEl.textContent = "آخرین به‌روزرسانی: " + feed.updated.slice(0, 19).replace("T", " ");
+      updatedEl.textContent = "آخرین به‌روزرسانی: " + formatDate(feed.updated);
     }
     renderDateRange();
     renderFilters();

@@ -1,4 +1,7 @@
 /* RTL news-style UI with Vazirmatn, light/dark theme */
+* {
+  direction: rtl;
+}
 :root {
   --bg: #f5f5f7;
   --bg-elevated: #fff;
