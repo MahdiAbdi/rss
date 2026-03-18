@@ -1,9 +1,9 @@
 # Telegram channels (public): username only, no @ or t.me
 # Script fetches https://t.me/s/<username>
 telegram:
-  - durov
+  - VahidOnline
 
 # Websites: RSS or HTML. For HTML, optional selector for item containers.
 websites:
-  - url: https://hnrss.org/frontpage
+  - url: https://www.radiofarda.com/rssfeeds
     type: rss
