@@ -32,6 +32,28 @@ REQUEST_HEADERS = {
 REQUEST_TIMEOUT = 25
 MAX_FULL_ARTICLES_PER_SOURCE = 20
 ARTICLE_FETCH_TIMEOUT = 15
+TELEGRAM_POST_TIMEOUT = 8
+MAX_FULL_POST_FETCH_PER_CHANNEL = 25
+
+
+def fetch_telegram_post_content(post_url: str) -> str:
+    """Fetch single Telegram post page and return full message text (no truncation)."""
+    if not post_url or not post_url.startswith("https://t.me/"):
+        return ""
+    try:
+        resp = requests.get(
+            post_url,
+            headers=REQUEST_HEADERS,
+            timeout=TELEGRAM_POST_TIMEOUT,
+        )
+        resp.raise_for_status()
+        soup = BeautifulSoup(resp.text, "html.parser")
+        text_el = soup.select_one(".tgme_widget_message_text")
+        if not text_el:
+            return ""
+        return text_el.get_text(separator="\n", strip=True)
+    except Exception:
+        return ""
 
 
 def extract_article_content(url: str) -> str:
@@ -171,6 +193,15 @@ def fetch_telegram_channel(
         for it in items:
             it.pop("_post_id", None)
         items = items[:max_items]
+
+    for i, it in enumerate(items):
+        if i >= MAX_FULL_POST_FETCH_PER_CHANNEL:
+            break
+        post_url = it.get("url") or ""
+        if post_url.startswith("https://t.me/"):
+            full_text = fetch_telegram_post_content(post_url)
+            if full_text:
+                it["content"] = full_text
 
     return (
         {"id": source_id, "title": title, "url": url, "items": items},

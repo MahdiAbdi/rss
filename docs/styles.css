@@ -34,12 +34,15 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: inherit;
+  direction: inherit;
 }
 
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   direction: rtl;
+  font-family: var(--font);
 }
 
 body {
@@ -50,6 +53,12 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   text-align: right;
+  direction: rtl;
+}
+
+input, button, select, textarea {
+  font-family: var(--font);
+  direction: rtl;
 }
 
 /* Masthead (news-style) */
@@ -170,6 +179,9 @@ body {
   margin: 0 auto;
   padding: 1rem;
   padding-bottom: 2rem;
+  direction: rtl;
+  font-family: var(--font);
+  text-align: right;
 }
 
 .loading,
@@ -255,6 +267,9 @@ body {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   display: none;
+  direction: rtl;
+  font-family: var(--font);
+  text-align: right;
 }
 
 .reader-overlay.is-open {
@@ -266,6 +281,9 @@ body {
   margin: 0 auto;
   padding: 1rem;
   padding-bottom: 3rem;
+  direction: rtl;
+  font-family: var(--font);
+  text-align: right;
 }
 
 .reader__header {
@@ -326,6 +344,9 @@ body {
   line-height: 1.65;
   white-space: pre-wrap;
   word-wrap: break-word;
+  direction: rtl;
+  font-family: var(--font);
+  text-align: right;
 }
 
 .reader__body.reader__body--html {
