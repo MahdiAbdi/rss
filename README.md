@@ -50,3 +50,11 @@ After the first successful run, `docs/data/feed.json` is updated and the Pages s
 
 - **Public repo**: GitHub Actions and Pages are free.
 - **Private repo**: 2,000 Actions minutes/month on Free plan; overage is billed. Run less often or use a public repo to avoid cost.
+
+## No Actions or Pages?
+
+- **Actions tab empty or no workflow?**  
+  Repo **Settings → Actions → General** → set **Allow all actions and reusable workflows** (or at least allow this repo). Then go to **Actions**; you should see **Fetch and publish**. You can **Run workflow** manually.
+
+- **Pages not loading?**  
+  Pages do **not** turn on by themselves. Go to repo **Settings → Pages** → under **Build and deployment**, set **Source** to **Deploy from a branch** → **Branch**: `main`, **Folder**: `/docs` → Save. The site will be at `https://<username>.github.io/rss/` after a minute or two.
