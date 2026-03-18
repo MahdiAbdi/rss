@@ -112,6 +112,34 @@ input, button, select, textarea {
   margin-top: 0.25rem;
 }
 
+.new-count {
+  display: inline-block;
+  margin-left: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--filter-active-text);
+  background: var(--filter-active-bg);
+  border-radius: 6px;
+}
+
+.new-count::before {
+  content: "";
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  margin-left: 0.35rem;
+  vertical-align: middle;
+  border-radius: 50%;
+  background: currentColor;
+  animation: new-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes new-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
 /* Theme toggle */
 .theme-toggle {
   display: inline-flex;
@@ -228,6 +256,22 @@ input, button, select, textarea {
 
 .card:first-child {
   padding-top: 0;
+}
+
+.card {
+  position: relative;
+}
+
+.card__badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  background: var(--accent);
+  color: var(--filter-active-text);
 }
 
 .card__source {

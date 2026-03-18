@@ -181,6 +181,10 @@ def fetch_telegram_channel(
                 max_id = max(max_id, int(post_id_str))
             except ValueError:
                 pass
+        for it in new_items:
+            it["is_new"] = True
+        for it in previous_items:
+            it["is_new"] = False
         merged = new_items + [it for it in previous_items if it.get("url") not in {i["url"] for i in new_items}]
         for it in merged:
             it.pop("_post_id", None)
@@ -192,6 +196,7 @@ def fetch_telegram_channel(
         items = [it for _, it in parsed]
         for it in items:
             it.pop("_post_id", None)
+            it["is_new"] = True
         items = items[:max_items]
 
     for i, it in enumerate(items):
@@ -259,6 +264,7 @@ def fetch_rss(feed_url: str) -> dict:
             "date": published,
             "snippet": snippet,
             "content": content,
+            "is_new": i < 15,
         })
 
     return {
@@ -313,7 +319,7 @@ def fetch_html_page(site: dict) -> dict:
                     extracted = extract_article_content(href)
                     if extracted:
                         content = extracted
-                items.append({"title": text or href, "url": href, "date": "", "snippet": snippet, "content": content})
+                items.append({"title": text or href, "url": href, "date": "", "snippet": snippet, "content": content, "is_new": i < 15})
     else:
         seen = set()
         count = 0
@@ -333,7 +339,7 @@ def fetch_html_page(site: dict) -> dict:
                 extracted = extract_article_content(href)
                 if extracted:
                     content = extracted
-            items.append({"title": text, "url": href, "date": "", "snippet": snippet, "content": content})
+            items.append({"title": text, "url": href, "date": "", "snippet": snippet, "content": content, "is_new": count < 15})
             count += 1
 
     return {
@@ -443,10 +449,13 @@ def build_feed(
     if date_max is not None:
         date_range["max"] = date_max.isoformat().replace("+00:00", "Z")
 
+    new_count = sum(1 for src in out_sources for it in (src.get("items") or []) if it.get("is_new"))
+
     return (
         {
             "updated": updated,
             "date_range": date_range,
+            "new_count": new_count,
             "sources": out_sources,
         },
         new_state,

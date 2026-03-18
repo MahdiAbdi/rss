@@ -4,6 +4,7 @@
   var activeFilterId = "all";
 
   var updatedEl = document.getElementById("updated");
+  var newCountEl = document.getElementById("new-count");
   var daterangeEl = document.getElementById("daterange");
   var filtersEl = document.getElementById("filters");
   var loadingEl = document.getElementById("loading");
@@ -180,7 +181,9 @@
       if (snippet && (item.snippet || "").length > 200) snippet += "…";
       var date = escapeHtml(formatDate(item.date));
       var sourceTitle = escapeHtml(src.title || src.id || "");
-      html += "<li class=\"card\" data-source-id=\"" + escapeHtml(src.id || "") + "\" data-item-url=\"" + escapeHtml(item.url || "#") + "\">";
+      var isNew = item.is_new === true;
+      html += "<li class=\"card" + (isNew ? " card--new" : "") + "\" data-source-id=\"" + escapeHtml(src.id || "") + "\" data-item-url=\"" + escapeHtml(item.url || "#") + "\">";
+      if (isNew) html += "<span class=\"card__badge\">جدید</span>";
       html += "<span class=\"card__source\">" + sourceTitle + "</span>";
       html += "<h2 class=\"card__title\">" + title + "</h2>";
       if (snippet) html += "<p class=\"card__snippet\">" + snippet + "</p>";
@@ -229,11 +232,23 @@
     document.body.style.overflow = "";
   }
 
+  function renderNewCount() {
+    var n = feed && typeof feed.new_count === "number" ? feed.new_count : 0;
+    if (n <= 0) {
+      newCountEl.style.display = "none";
+      newCountEl.textContent = "";
+      return;
+    }
+    newCountEl.textContent = toPersianDigits(n) + " مورد جدید";
+    newCountEl.style.display = "inline";
+  }
+
   function renderFeed(data) {
     feed = data;
     if (feed.updated) {
       updatedEl.textContent = "آخرین به‌روزرسانی: " + formatDate(feed.updated);
     }
+    renderNewCount();
     renderDateRange();
     renderFilters();
     renderCardList();
